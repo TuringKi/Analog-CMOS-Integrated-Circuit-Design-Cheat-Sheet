@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MatPlotLib and Random Cheat Sheet
+%
+% Edited by Michelle Cristina de Sousa Baltazar
+%
+% http://matplotlib.org/api/pyplot_summary.html
+% http://matplotlib.org/users/pyplot_tutorial.html
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+
+\title{MatPlotLib and Random Cheat Sheet}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth4in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\begin{document}
+
+\begin{center}{\huge{\textbf{Analog CMOS Integrated Circuit Design Cheat Sheet}}}\\
+{\large By Xiao Ma (mxlol233@outlook.com)}
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+%------------ CONTEÚDO CAIXA RANDOM ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+		Process parameters ($n$,$V_{TH}$,$KP$, $V_E$):
+      \begin{equation}
+        t_{OX} = \frac{L_{min}}{50}
+       \end{equation}
+
+
+       \begin{equation}
+        t_{si} = \sqrt{\frac{2\epsilon_{si}(\Phi - V_{BD})}{qN_B}}
+       \end{equation}
+
+       \begin{equation}
+        C_{OX} = \frac{\bold{\epsilon}_{OX}}{t_{OX}}
+       \end{equation}
+
+       \begin{equation}
+        C_{D} = \frac{\bold{\epsilon}_{si}}{t_{si}}
+       \end{equation}
+
+       \begin{equation}
+        KP = \mu C_{OX}
+       \end{equation}
+
+
+
+      \begin{equation}
+       \bold{\beta} = KP\frac{W}{L}
+      \end{equation}
+
+      \begin{equation}
+        V_{TH} = V_{TH0} + \gamma [\sqrt{|2\Phi_F| + V_{BS}} - \sqrt{||2\Phi_F|}]
+       \end{equation}
+
+       \begin{equation}
+        n = \frac{\gamma}{\sqrt{|2\Phi_F| + V_BS}} = 1 + \frac{C_D}{C_{OX}}
+       \end{equation}
+
+
+      Channel-Length Modulation:
+      \begin{equation}
+        \frac{1}{2}KP\frac{W}{L}(V-V_{TH})^2(1+\lambda V_{DS})
+      \end{equation}
+
+
+    \end{minipage}
+};
+%------------ CAIXA RANDOM ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Model of MOS Transistors};
+\end{tikzpicture}
+
+%------------ CONTEUDO EXEMPLO BASICO ---------------------
+\begin{tikzpicture}
+  \node [mybox] (box){%
+      \begin{minipage}{0.4\textwidth}
+\begin{center}
+        \small{\begin{tabular}{lp{1.4cm} l}
+          {\bf Names} & {\bf Symbols} & {\bf Values} \\
+          dielectric constant of sub-silicon & $\epsilon_{si}$ & $1$ pF/cm \\ \hline
+          dielectric constant of gate-oxide & $\epsilon_{OX}$ & $0.34$ pF/cm \\ \hline
+          electron charge & $q$ & $1.6 \times 10^{-19}$ C \\ \hline
+        minium channel length & $L_{min}$ & $0.35 \mu m$ \\ \hline
+        width of gate-oxide capacitor & $t_{OX}$ & $0.1 \mu$m \\ \hline
+        width of sub-silicon capacitor & $t_{si}$ & $7 $nm \\ \hline
+
+
+            \end{tabular}}
+
+            
+          \end{center}
+
+            \end{minipage}
+  };
+  %------------ EXEMPLO BASICO BOX ---------------------
+  \node[fancytitle, right=10pt] at (box.north west) {Value Examples In $0.35\mu m$ Process Nodes };
+  \end{tikzpicture}
+
+\end{multicols*}
+\end{document}
