@@ -24,13 +24,18 @@
 \usepackage{amsmath,amssymb}
 \usepackage{enumitem}
 
-\title{MatPlotLib and Random Cheat Sheet}
-\usepackage[brazilian]{babel}
+
+\usepackage{geometry}
+ \geometry{
+  a3paper
+ }
+
+
 \usepackage[utf8]{inputenc}
 
 \advance\topmargin-.8in
 \advance\textheight3in
-\advance\textwidth4in
+\advance\textwidth3in
 \advance\oddsidemargin-1.5in
 \advance\evensidemargin-1.5in
 \parindent0pt
@@ -79,19 +84,51 @@
        \bold{\beta} = KP\frac{W}{L}
       \end{equation}
 
+
+\begin{equation}
+  Q_{dep} = \sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}
+\end{equation}
+
+
+\begin{equation}
+  V_{TH0} = \Phi_{MS} + 2 \Phi_F + \frac{Q_{dep}}{C_{OX}}
+\end{equation}
+
+
       \begin{equation}
-        V_{TH} = V_{TH0} + \gamma [\sqrt{|2\Phi_F| + V_{BS}} - \sqrt{||2\Phi_F|}]
+        V_{TH} = V_{TH0} + \gamma (\sqrt{|2\Phi_F| + V_{BS}} - \sqrt{|2\Phi_F|})
        \end{equation}
 
        \begin{equation}
-        n = \frac{\gamma}{\sqrt{|2\Phi_F| + V_BS}} = 1 + \frac{C_D}{C_{OX}}
+        n = \frac{\gamma}{\sqrt{|2\Phi_F| + V_{BS}}} = 1 + \frac{C_D}{C_{OX}}
        \end{equation}
+In linear region:
+\begin{equation}
+  I_{DS} = \beta[(V_{GS}-V_{TH})V_{DS} - \frac{1}{2}V_{DS}^2]
+\end{equation}
 
+\begin{equation}
+  R_{on} = \frac{1}{\beta (V_{GS} - V_{TH})}
+\end{equation}
 
-      Channel-Length Modulation:
+      Channel-Length modulation in saturation region:
+
       \begin{equation}
-        \frac{1}{2}KP\frac{W}{L}(V-V_{TH})^2(1+\lambda V_{DS})
+        K' = \frac{KP}{2n}
       \end{equation}
+
+      \begin{equation}
+        \lambda = \frac{1}{V_E L}
+      \end{equation}
+      \begin{equation}
+       I_{DS} =  \frac{1}{2}K' \frac{W}{L}(V-V_{TH})^2(1+\lambda V_{DS})
+      \end{equation}
+      \begin{equation}
+        r_{o} = \frac{\partial V_{DS}}{\partial I_{DS}} \approx \frac{1}{\lambda I_{DS}} = \frac{V_E L}{I_{DS}}
+      \end{equation}
+Saturation region has three distinctive regions: weak-inversion (exponential region),  
+strong-inversion, and velocity saturation.
+ 
 
 
     \end{minipage}
@@ -103,17 +140,29 @@
 %------------ CONTEUDO EXEMPLO BASICO ---------------------
 \begin{tikzpicture}
   \node [mybox] (box){%
-      \begin{minipage}{0.4\textwidth}
+      \begin{minipage}{0.3\textwidth}
 \begin{center}
         \small{\begin{tabular}{lp{1.4cm} l}
           {\bf Names} & {\bf Symbols} & {\bf Values} \\
           dielectric constant of sub-silicon & $\epsilon_{si}$ & $1$ pF/cm \\ \hline
           dielectric constant of gate-oxide & $\epsilon_{OX}$ & $0.34$ pF/cm \\ \hline
           electron charge & $q$ & $1.6 \times 10^{-19}$ C \\ \hline
-        minium channel length & $L_{min}$ & $0.35 \mu m$ \\ \hline
-        width of gate-oxide capacitor & $t_{OX}$ & $0.1 \mu$m \\ \hline
-        width of sub-silicon capacitor & $t_{si}$ & $7 $nm \\ \hline
-
+        minium channel length & $L_{min}$ & $0.35$ $\mu$m \\ \hline
+        width of gate-oxide  & $t_{OX}$ & $0.1$ nm \\ \hline
+        width of depletion layer & $t_{si}$ & $7$ nm \\ \hline
+        junction built-in voltage & $\Phi$ & $0.6$ V\\ \hline
+        drain-bulk voltage & $V_{BD}$ & $-3.3 $V \\ \hline
+         gate-oxide capacitance & $C_{OX}$ & $0.5$ $\mu$F/cm$^2$ \\ \hline
+         depletion layer capacitance & $C_{D}$ & $0.1$ $\mu$F/cm$^2$ \\ \hline
+         bulk doping level & $N_B$ & $4\times10^{17}$ cm$^{-3}$ \\ \hline
+         P type mobility rate & $\mu_{p}$& $250$ cm$^2$/Vs\\ \hline
+         N type mobility rate & $\mu_{n}$&  $600$ cm$^2$/Vs \\ \hline
+         N type KP & $KP_{n}$ &  $300$ $\mu$A/V$^2$ \\ \hline
+         & $n$ &  $1.2 \cdots 1.5$ \\ \hline
+         & $|2\Phi_F|$ &  $0.6$ V \\ \hline
+         & $\gamma$ &  $0.5 \cdots 0.8$ V$^{\frac{1}{2}}$ \\ \hline
+         N type $K'$ & $K'_{n}$ &  $100$ $\mu$A/V$^2$ \\ \hline
+         P type $K'$ & $K'_{p}$ &  $40$ $\mu$A/V$^2$ \\ \hline
 
             \end{tabular}}
 
@@ -125,6 +174,57 @@
   %------------ EXEMPLO BASICO BOX ---------------------
   \node[fancytitle, right=10pt] at (box.north west) {Value Examples In $0.35\mu m$ Process Nodes };
   \end{tikzpicture}
+
+
+  \begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+  \begin{center}
+         
+
+    
+
+
+            \end{center}
+  
+              \end{minipage}
+    };
+    \node[fancytitle, right=10pt] at (box.north west) {Weak-Inversion region (exponential region)};
+    \end{tikzpicture}
+
+    \begin{tikzpicture}
+      \node [mybox] (box){%
+          \begin{minipage}{0.3\textwidth}
+    \begin{center}
+           
+  
+              \end{center}
+    
+                \end{minipage}
+      };
+      %------------ EXEMPLO BASICO BOX ---------------------
+      \node[fancytitle, right=10pt] at (box.north west) {strong-inversion};
+      \end{tikzpicture}
+
+
+    
+        \begin{tikzpicture}
+          \node [mybox] (box){%
+              \begin{minipage}{0.3\textwidth}
+        \begin{center}
+               
+      
+                  \end{center}
+        
+                    \end{minipage}
+          };
+          %------------ EXEMPLO BASICO BOX ---------------------
+          \node[fancytitle, right=10pt] at (box.north west) {velocity saturation};
+          \end{tikzpicture}
+    
+
+      
+      
 
 \end{multicols*}
 \end{document}
