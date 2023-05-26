@@ -121,7 +121,7 @@ In linear region:
         \lambda = \frac{1}{V_E L}
       \end{equation}
       \begin{equation}
-       I_{DS} =  \frac{1}{2}K' \frac{W}{L}(V-V_{TH})^2(1+\lambda V_{DS})
+       I_{DS} =  K' \frac{W}{L}(V_{GS}-V_{TH})^2(1+\lambda V_{DS})
       \end{equation}
       \begin{equation}
         r_{o} = \frac{\partial V_{DS}}{\partial I_{DS}} \approx \frac{1}{\lambda I_{DS}} = \frac{V_E L}{I_{DS}}
@@ -163,7 +163,8 @@ strong-inversion, and velocity saturation.
          & $\gamma$ &  $0.5 \cdots 0.8$ V$^{\frac{1}{2}}$ \\ \hline
          N type $K'$ & $K'_{n}$ &  $100$ $\mu$A/V$^2$ \\ \hline
          P type $K'$ & $K'_{p}$ &  $40$ $\mu$A/V$^2$ \\ \hline
-
+           & $V_{GSTt}$ &  $70$ mV \\ \hline
+      
             \end{tabular}}
 
             
@@ -179,13 +180,19 @@ strong-inversion, and velocity saturation.
   \begin{tikzpicture}
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
-  \begin{center}
-         
 
-    
+         \begin{equation}
+          I_{DS}= I_{D0}\frac{W}{L}e^{\frac{V_{GS}}{n\frac{KT}{q}}}
+         \end{equation}
+
+  
+\begin{equation}
+g_{m} = \frac{\partial I_{DS}}{\partial V_{GS}} = \frac{I_{DS}}{n\frac{KT}{q}}
+\end{equation}
 
 
-            \end{center}
+
+   
   
               \end{minipage}
     };
@@ -195,11 +202,16 @@ strong-inversion, and velocity saturation.
     \begin{tikzpicture}
       \node [mybox] (box){%
           \begin{minipage}{0.3\textwidth}
-    \begin{center}
-           
-  
-              \end{center}
-    
+Ignore channel-length modulation:
+            \begin{equation}
+              I_{DS} =  K' \frac{W}{L}(V_{GS}-V_{TH})^2
+             \end{equation}
+
+             \begin{equation}
+              g_m = \frac{2I_{DS}}{V_{GS} - V_{TH}}
+             \end{equation}
+         
+
                 \end{minipage}
       };
       %------------ EXEMPLO BASICO BOX ---------------------
@@ -211,6 +223,52 @@ strong-inversion, and velocity saturation.
         \begin{tikzpicture}
           \node [mybox] (box){%
               \begin{minipage}{0.3\textwidth}
+                The voltage  and current  at transition point between weak-inversion and strong-inversion:
+                \begin{equation}
+                 V_{GSt} =  2n\frac{KT}{q} + V_{TH} 
+                \end{equation}
+                \begin{equation}
+                 I_{DSt} \approx  K'\frac{W}{L} (2n\frac{KT}{q})^2  
+                \end{equation}
+          EKV model, a smooth model for weak-inversion and strong-inversion regions:
+   
+          \begin{equation}
+           I_{DS} =  K' \frac{W}{L}(V_{GS}-V_{TH})^2[ ln(1+e^{\frac{V_{GS}}{V_{GSt}}}) ]^2
+          \end{equation}
+          Let:
+          \begin{equation}
+           v =  \frac{V_{GS}}{V_{GSt}}
+          \end{equation}
+          \begin{equation}
+           i =  \frac{I_{DS}}{I_{DSt}} = [ ln(1+e^{v}) ]^2
+          \end{equation}
+          then,
+          \begin{equation}
+            v  = ln(e^{\sqrt{i}} -1)
+           \end{equation}
+           \begin{equation}
+            V_{GS} - V_{TH}  = V_{GSTt}ln(e^{\sqrt{i}} -1)
+           \end{equation}
+where:
+\begin{equation}
+  V_{GSTt} = V_{GSt} - V_{TH} = 2n\frac{KT}{q} 
+\end{equation}
+          When $v=1$, $i=1$, we also have:
+          \begin{equation}
+           I_{DSt} = K'\frac{W}{L}(V_{GSt} - V_{TH})^2
+          \end{equation}
+        
+                    \end{minipage}
+          };
+          %------------ EXEMPLO BASICO BOX ---------------------
+          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
+          \end{tikzpicture}
+    
+
+              
+        \begin{tikzpicture}
+          \node [mybox] (box){%
+              \begin{minipage}{0.3\textwidth}
         \begin{center}
                
       
@@ -219,10 +277,25 @@ strong-inversion, and velocity saturation.
                     \end{minipage}
           };
           %------------ EXEMPLO BASICO BOX ---------------------
-          \node[fancytitle, right=10pt] at (box.north west) {velocity saturation};
+          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
           \end{tikzpicture}
     
 
+              
+        \begin{tikzpicture}
+          \node [mybox] (box){%
+              \begin{minipage}{0.3\textwidth}
+        \begin{center}
+               
+      
+                  \end{center}
+        
+                    \end{minipage}
+          };
+          %------------ EXEMPLO BASICO BOX ---------------------
+          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
+          \end{tikzpicture}
+    
       
       
 
