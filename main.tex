@@ -23,6 +23,8 @@
 \usepackage{mathtools}
 \usepackage{amsmath,amssymb}
 \usepackage{enumitem}
+\usepackage{circuitikzgit}
+\usetikzlibrary{fit, shapes, arrows, patterns, decorations.text, decorations.markings}
 
 
 \usepackage{geometry}
@@ -329,18 +331,145 @@ where:
           \end{tikzpicture}
     
       
+
           \begin{tikzpicture}
+
+
+            
             \node [mybox] (box){%
                 \begin{minipage}{0.3\textwidth}
-  
-                 
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
-  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+      
+                  A system with $2$ frequency-dependent elements,  th transfer function in complex-frequency form:
+                  \begin{equation}
+                    H_s =  \frac{ a_0 + a_1s  +a_2s^2 }{  b_1s + b_2s^2     }
+                  \end{equation}  
+where:
+                  \begin{equation}
+                    a_0 = H^0
+                   \end{equation}  
+                   \begin{equation}
+                    b_1 = \tau_1^0 + \tau_2^0
+                   \end{equation}  
+                   \begin{equation}
+                    a_1 = \tau_1^0 H^1 + \tau_2^0 H^2
+                   \end{equation}  
+                   \begin{equation}
+                    b_2 = \tau_1^0  \tau_2^1 = \tau_2^0 \tau_1^2 
+                   \end{equation}
+                   \begin{equation}
+                    a_2 = \tau_1^0  \tau_2^1 H^{12} = \tau_2^0 \tau_1^2  H^{12}
+                   \end{equation}
 
+                      \end{minipage}
+            };
+            %------------ EXEMPLO BASICO BOX ---------------------
+            \node[fancytitle, right=10pt] at (box.north west) {2nd Order Time-constants and Transfer-Constants (TTCs)};
+            \end{tikzpicture}
+
+
+ 
+          \begin{tikzpicture}
+
+
+            
+            \node [mybox] (box){%
+                \begin{minipage}{0.3\textwidth}
+
+                A system with $N$ frequency-dependent elements,  th transfer function:
+                \begin{equation}
+                  H_s =  \frac{ a_0 + a_1s + a_2s^2  \cdots +a_ns^n +\cdots  }{ b_1s  + b_2s^2 \cdots +b_ns^n +\cdots     }
+                \end{equation}  
+           where:
+           \begin{equation}
+           a_0 = H^0
+          \end{equation}  
+          \begin{equation}
+            b_1 = \sum_{i=1}^{N}\tau_i^0
+           \end{equation}  
+           \begin{equation}
+            a_1 = \sum_{i=1}^{N}\tau_i^0 H^i
+           \end{equation}
+           \begin{equation}
+            b_2 = \sum_{i=1}^{i< j} \sum_{j=i+1}^{j\leq N} \tau_i^0 \tau_j^i
+           \end{equation}  
+           \begin{equation}
+            a_2 = \sum_{i=1}^{i< j} \sum_{j=i+1}^{j\leq N} \tau_i^0 \tau_j^i H^{ij}
+           \end{equation}
+           \begin{equation}
+            b_n = \sum_{i=1}^{i< j} \sum_{j=i+1}^{j<k} \sum_{k=j+1\cdots}^{k<...\leq N} \tau_i^0 \tau_j^i \tau_k^{ij} \cdots
+           \end{equation}  
+           \begin{equation}
+            a_n = \sum_{i=1}^{i< j} \sum_{j=i+1}^{j<k} \sum_{k=j+1\cdots}^{k<...\leq N} \tau_i^0 \tau_j^i \tau_k^{ij} \cdots H^{ijk...}
+           \end{equation}  
+        
+
+and for capacitor,
+\begin{equation}
+  \tau_i^0 = C_i R_i^0 
+ \end{equation}
+ \begin{equation}
+  \tau_i^{jk\cdots} =C_i R_i^{jk\cdots} 
+ \end{equation} 
+ or for inductor,
+ \begin{equation}
+  \tau_i^0 = \frac{L_i}{R_i^0}
+ \end{equation}    
+ \begin{equation}
+  \tau_i^{jk\cdots} =\frac{L_i} {R_i^{jk\cdots}} 
+ \end{equation} 
+                In the form of zeros and poles:
+                \begin{equation}
+                  H_s = a_0 \frac{ (1-\frac{s}{z_1}) (1-\frac{s}{z_1}) \cdots (1-\frac{s}{z_m})   }{  (1-\frac{s}{p_1}) (1-\frac{s}{p_1}) \cdots (1-\frac{s}{p_n})    }
+                \end{equation}  
+  
+                      \end{minipage}
+            };
+            %------------ EXEMPLO BASICO BOX ---------------------
+            \node[fancytitle, right=10pt] at (box.north west) {General Time-constants and Transfer-Constants (TTCs)};
+            \end{tikzpicture}
+
+
+          \begin{tikzpicture}
+
+
+            
+            \node [mybox] (box){%
+                \begin{minipage}{0.3\textwidth}
+  \begin{center}
+
+                  \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+                   
+
+                    \coordinate (D) at (1.1,2.4);
+  \coordinate (V_i) at (0,1.4);
+  \coordinate (S) at (1.1,0.4);
+  \coordinate (V_{out}) at (3.1,2.4);
+  \coordinate (1) at (1.1,4.4);
+  \coordinate (0) at (1.1,0);
+  \coordinate (2) at (1.1,4.42);
+ \ctikzset{tripoles/mos style/arrows}
+  \draw (1.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+  \draw (M1.D) -- (D) (M1.G) -- (V_i) (M1.S) -- (S);
+  \draw[-] (D) to (V_{out});
+  \draw (D) to [R, bipoles/length=0.90cm, l_={${R_1}$}, n=R] (1);
+  \draw[-] (S) to (0);
+  \draw[-] (1) to (2);
+  \draw (D) node[circ] {};
+  \draw (V_i) node[ocirc] {};
+  \draw (S) node[circ] {};
+  \draw (V_{out}) node[ocirc] {};
+  \draw (0) node[sground] {};
+  \draw[anchor=west] (1.3,-0.5) node {ground};
+  \draw (2) node[rground, rotate=180] {};
+  \draw[anchor=west] (1.3,4.92) node {$V_{\mathrm{DD}}$};
+  \draw[anchor=south east] (D) node {D};
+  \draw[anchor=south east] (V_i) node {V$_{\mathrm{i}}$};
+  \draw[anchor=south east] (S) node {S};
+  \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+
+                  \end{tikzpicture}
+               
+  \end{center}     
   
                       \end{minipage}
             };
