@@ -164,7 +164,9 @@ strong-inversion, and velocity saturation.
          N type $K'$ & $K'_{n}$ &  $100$ $\mu$A/V$^2$ \\ \hline
          P type $K'$ & $K'_{p}$ &  $40$ $\mu$A/V$^2$ \\ \hline
            & $V_{GSTt}$ &  $70$ mV \\ \hline
-      
+           & $v_{sat}$ &  $10^{7}$ cm/s \\ \hline
+           & $\theta L$ &  $0.2$ $\mu$m/V \\ \hline
+           
             \end{tabular}}
 
             
@@ -196,7 +198,7 @@ g_{m} = \frac{\partial I_{DS}}{\partial V_{GS}} = \frac{I_{DS}}{n\frac{KT}{q}}
   
               \end{minipage}
     };
-    \node[fancytitle, right=10pt] at (box.north west) {Weak-Inversion region (exponential region)};
+    \node[fancytitle, right=10pt] at (box.north west) {Weak-Inversion};
     \end{tikzpicture}
 
     \begin{tikzpicture}
@@ -261,7 +263,7 @@ where:
                     \end{minipage}
           };
           %------------ EXEMPLO BASICO BOX ---------------------
-          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
+          \node[fancytitle, right=10pt] at (box.north west) {Transition Point Between Weak-Inversion and Strong-Inversion};
           \end{tikzpicture}
     
 
@@ -269,15 +271,19 @@ where:
         \begin{tikzpicture}
           \node [mybox] (box){%
               \begin{minipage}{0.3\textwidth}
-        \begin{center}
-               
-      
-                  \end{center}
+    
+                \begin{equation}
+                  I_{DS} =  WC_{OX}v_{sat}(V_{GS}-V_{TH})
+                 \end{equation}
+                 \begin{equation}
+                  g_m=  WC_{OX}v_{sat}
+                 \end{equation}
+
         
                     \end{minipage}
           };
           %------------ EXEMPLO BASICO BOX ---------------------
-          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
+          \node[fancytitle, right=10pt] at (box.north west) {Velocity Saturation};
           \end{tikzpicture}
     
 
@@ -285,18 +291,62 @@ where:
         \begin{tikzpicture}
           \node [mybox] (box){%
               \begin{minipage}{0.3\textwidth}
-        \begin{center}
+
                
-      
-                  \end{center}
+
+                A smooth model for strong-inversion  and velocity saturation regions:
+                \begin{equation}
+                  I_{DS} = \frac{K' \frac{W}{L}(V_{GS}-V_{TH})^2}{1 + \theta (V_{GS} - V_{TH})} 
+                 \end{equation}
         
+                 where:
+        \begin{equation}
+          \theta = \frac{\mu}{2n}\frac{1}{v_{sat}L}
+         \end{equation}
+         $\theta L$ is constant:
+         \begin{equation}
+          \theta L = \frac{\mu}{2n}\frac{1}{v_{sat}}
+         \end{equation}
+
+         \begin{equation}
+          g_{m,sat} =WC_{OX}v_{sat}= \frac{K'W}{\theta L}
+         \end{equation}
+
+
+         The voltage  and current  at transition point between strong-inversion  and velocity saturation:
+         \begin{equation}
+          V_{GSt} = \frac{1}{\theta} + V_{TH} = 2nL\frac{v_{sat}}{\mu} + V_{TH}
+         \end{equation}
+         \begin{equation}
+          I_{DSt} = K'WL(2n\frac{v_{sat}}{\mu})^2
+         \end{equation}
+
+
                     \end{minipage}
           };
           %------------ EXEMPLO BASICO BOX ---------------------
-          \node[fancytitle, right=10pt] at (box.north west) {transition point between weak-inversion and strong-inversion};
+          \node[fancytitle, right=10pt] at (box.north west) {Transition Point Between Strong-Inversion and Velocity Saturation};
           \end{tikzpicture}
     
       
+          \begin{tikzpicture}
+            \node [mybox] (box){%
+                \begin{minipage}{0.3\textwidth}
+  
+                 
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+  
+                      \end{minipage}
+            };
+            %------------ EXEMPLO BASICO BOX ---------------------
+            \node[fancytitle, right=10pt] at (box.north west) {Operational-Amp: Biasing Circuits};
+            \end{tikzpicture}
       
 
 \end{multicols*}
