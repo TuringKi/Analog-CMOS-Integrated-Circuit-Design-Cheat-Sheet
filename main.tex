@@ -29,7 +29,7 @@
 
 \usepackage{geometry}
  \geometry{
-  a3paper
+  a2paper
  }
 
 
@@ -62,45 +62,43 @@
       \begin{equation}
         t_{OX} = \frac{L_{min}}{50}
        \end{equation}
-
-
        \begin{equation}
         t_{si} = \sqrt{\frac{2\epsilon_{si}(\Phi - V_{BD})}{qN_B}}
        \end{equation}
-
        \begin{equation}
         C_{OX} = \frac{\bold{\epsilon}_{OX}}{t_{OX}}
        \end{equation}
-
        \begin{equation}
         C_{D} = \frac{\bold{\epsilon}_{si}}{t_{si}}
-       \end{equation}
-
+      \end{equation}
        \begin{equation}
         KP = \mu C_{OX}
        \end{equation}
-
-
-
       \begin{equation}
        \bold{\beta} = KP\frac{W}{L}
       \end{equation}
-
-
 \begin{equation}
   Q_{dep} = \sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}
 \end{equation}
-
-
 \begin{equation}
   V_{TH0} = \Phi_{MS} + 2 \Phi_F + \frac{Q_{dep}}{C_{OX}}
 \end{equation}
+Changing the Gate voltage $V_{GS}$ will thus
+change the conductivity of the channel and hence the current $I_{DS}$. In a similar way, changing
+the Bulk voltage $V_{BS}$ will thus also change the conductivity of the channel and will thus change the
+current $I_{DS}$ as well. The  gate gives the MOST operation, whereas the bulk gives JFET
+operation. 
+
+Indeed, a Junction FET is by definition a FET in which the current is controlled by
+a junction capacitance.
 
 
+All MOST devices are thus parallel combinations of MOSTs and JFETs.
+
+The Bulk voltage works like a "back-gate", which is also called as "body effect":
       \begin{equation}
         V_{TH} = V_{TH0} + \gamma (\sqrt{|2\Phi_F| + V_{BS}} - \sqrt{|2\Phi_F|})
        \end{equation}
-
        \begin{equation}
         n = \frac{\gamma}{\sqrt{|2\Phi_F| + V_{BS}}} = 1 + \frac{C_D}{C_{OX}}
        \end{equation}
@@ -108,17 +106,14 @@ In linear region:
 \begin{equation}
   I_{DS} = \beta[(V_{GS}-V_{TH})V_{DS} - \frac{1}{2}V_{DS}^2]
 \end{equation}
-
 \begin{equation}
   R_{on} = \frac{1}{\beta (V_{GS} - V_{TH})}
 \end{equation}
 
       Channel-Length modulation in saturation region:
-
       \begin{equation}
         K' = \frac{KP}{2n}
       \end{equation}
-
       \begin{equation}
         \lambda = \frac{1}{V_E L}
       \end{equation}
@@ -606,6 +601,10 @@ and for capacitor:
       \begin{equation}
         A_{v}^0  =\frac{V_{out}}{V_{in}}= -g_mR_{D} || r_o = -g_m\frac{R_D r_o}{R_D + r_o}
       \end{equation}
+      The equivalent resistance at point $out$ look down $M1$:
+      \begin{equation}
+        R_{out} = r_o
+      \end{equation}
   Consider high-frequency gain with $3$ capacitors $c_{\pi}, c_{\mu}, c_{L}$:
 
     \begin{center} 
@@ -665,7 +664,7 @@ and for capacitor:
     \end{center} 
 
     \begin{equation}
-      \tau_{\pi}^0 =  C_{\pi} (R_1 || R_{D}) 
+      \tau_{\pi}^0 =  C_{\pi} R_1 
     \end{equation}
     \begin{equation}
       \tau_{\mu}^0 =  C_{\mu} (R_{left} + R_{right} + G_m R_{left} R_{right} )=C_{\mu} (R_1 + R_D + g_m R_1 R_D )
@@ -676,13 +675,149 @@ and for capacitor:
     \begin{equation}
       \tau_{\mu}^{\pi} =  C_{\mu} R_D
     \end{equation}
-
+    \begin{equation}
+      \tau_{\pi}^{L} =  C_{\pi} R_1
+    \end{equation}
+    \begin{equation}
+      \tau_{\mu}^{L} =  C_{\mu} R_1
+    \end{equation}
+    \begin{equation}
+      \tau_{\mu}^{\pi L} = \tau_{L}^{\pi \mu} =  0
+    \end{equation}
+    \begin{equation}
+      H^{\pi} = H^{L} = 0
+    \end{equation}
+    \begin{equation}
+      H^{\mu} = \frac{r_m || R_D}{R_1 + r_m || R_D} = \frac{R_D}{R_1 + R_D + g_m R_1 R_D}
+    \end{equation}
+    \begin{equation}
+      H^{\pi \mu} =  H^{L \mu} =H^{L \pi} =0
+    \end{equation}
+    \begin{equation}
+     a_0 = A_{v}^0
+    \end{equation}
+     \begin{equation}
+      b_1 = \tau_{\pi}^{0} + \tau_{\mu}^{0} + \tau_{L}^{0} = R_1[C_{\pi} + C_{\mu}(1+g_m R_D)] + R_D(C_{\mu} + C_L)
+     \end{equation}
+     \begin{equation}
+      a_1 = \tau_{\pi}^{0} H^{\pi}+ \tau_{\mu}^{0} H^{\mu} + \tau_{L}^{0}H^{L} = C_{\mu} R_D
+     \end{equation}
+     \begin{equation}
+      b_2 = \tau_{\pi}^{0} \tau_{\mu}^{\pi} + \tau_{L}^{0} \tau_{\mu}^{L} +\tau_{L}^0 \tau_{\pi}^{L} = R_1 R_D(C_{\mu}C_{\pi} + C_{\mu}C_{L} + C_{\pi}C_L) = R_{left}R_{right} (\Delta C)^2
+     \end{equation}
+     \begin{equation}
+      a_2 = \tau_{\pi}^{0} \tau_{\mu}^{\pi} H^{\pi \mu}+ \tau_{L}^{0} \tau_{\mu}^{L} H^{L \mu} +\tau_{L}^0 \tau_{\pi}^{L} H^{L \pi} = 0
+     \end{equation}
+     \begin{equation}
+      b_3 = \tau_{\pi}^{0} \tau_{\mu}^{\pi} \tau_{L}^{\pi \mu} = 0
+     \end{equation}
+     \begin{equation}
+      a_3 = \tau_{\pi}^{0} \tau_{\mu}^{\pi} \tau_{L}^{\pi \mu} H^{\pi \mu L} = 0
+     \end{equation}
+     Finally, we have:
+     \begin{equation}
+      A_{v}(s) = \frac{A_v^0(1 - r_m C_{\mu} s)}{ 1+[R_1[C_{\pi} + C_{\mu}(1+g_m R_D)] + R_D(C_{\mu} + C_L)]s +R_1 R_D(C_{\mu}C_{\pi} + C_{\mu}C_{L} + C_{\pi}C_L)s^2 }
+     \end{equation}
                       \end{minipage}
             };
             %------------ EXEMPLO BASICO BOX ---------------------
-            \node[fancytitle, right=10pt] at (box.north west) {Operational-Amp: Biasing Circuits};
+            \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Resistive Load};
             \end{tikzpicture}
-      
+  
+            \begin{tikzpicture}
+
+
+            
+              \node [mybox] (box){%
+                  \begin{minipage}{0.3\textwidth}
+                    Common Source, with resistance $R_D$ and $R_S$:
+\begin{center}
+
+  \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+  
+
+    \coordinate (D) at (4.1,3.4);
+    \coordinate (G) at (3,2.4);
+    \coordinate (S) at (4.1,1.4);
+    \coordinate (out) at (5.1,3.4);
+    \coordinate (V_{out}) at (6.1,3.4);
+    \coordinate (in) at (2,2.4);
+    \coordinate (V_{in}) at (0,2.4);
+    \coordinate (1) at (4.1,5.4);
+    \coordinate (3) at (4.1,0.4);
+    \coordinate (0) at (4.1,0);
+    \coordinate (2) at (4.1,5.42);
+   \ctikzset{tripoles/mos style/arrows}
+    \draw (4.1,2.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+    \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+    \draw[-] (out) to (V_{out});
+    \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+    \draw[-] (D) to (out);
+    \draw (D) to [R, bipoles/length=0.90cm, l_={${R_D}$}, n=RD] (1);
+    \draw (S) to [R, bipoles/length=0.75cm, l_={${R_S}$}, n=RS] (3);
+    \draw[-] (3) to (0);
+    \draw[-] (1) to (2);
+    \draw[-] (G) to (in);
+    \draw (D) node[circ] {};
+    \draw (G) node[circ] {};
+    \draw (S) node[circ] {};
+    \draw (V_{out}) node[ocirc] {};
+    \draw (V_{in}) node[ocirc] {};
+    \draw (0) node[sground] {};
+    \draw (2) node[rground, rotate=180] {};
+    \draw[anchor=west] (4.3,5.92) node {$V_{\mathrm{DD}}$};
+    \draw[anchor=south east] (out) node {out};
+    \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+    \draw[anchor=south east] (in) node {in};
+    \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+
+  \end{tikzpicture}
+
+
+                  \end{center}
+                  The low frequency gain:
+  \begin{equation}
+    A_{v}^{0} = -\frac{g_m R_D}{1 + g_m R_S}
+  \end{equation}
+  The equivalent transconductance:
+  \begin{equation}
+    G_m = \frac{g_m}{1 + g_m R_S}
+  \end{equation}
+  consider channel-length modulation and body effect:
+  \begin{equation}
+    G_m = \frac{g_m r_o}{R_S + [1 + (g_m + g_{mb})R_s]r_o}
+  \end{equation}
+  \begin{equation}
+    R_{out} = r_o + [1 + (g_m + g_{mb})r_o]R_S \approx g_m r_o R_S
+  \end{equation}
+  \begin{equation}
+    A_v^0 = -G_m(R_{out} || R_D) = - \frac{g_m r_o}{R_S + [1 + (g_m + g_{mb})R_s]r_o} \{[r_o + [1 + (g_m + g_{mb})r_o]R_S] || R_D \} 
+  \end{equation}
+   
+                        \end{minipage}
+              };
+              %------------ EXEMPLO BASICO BOX ---------------------
+              \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Source Degeneration};
+              \end{tikzpicture}
+
+
+
+
+            \begin{tikzpicture}
+
+
+            
+              \node [mybox] (box){%
+                  \begin{minipage}{0.3\textwidth}
+
+
+  
+                        \end{minipage}
+              };
+              %------------ EXEMPLO BASICO BOX ---------------------
+              \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Drain (CD) or Source Follower};
+              \end{tikzpicture}
+
 
 \end{multicols*}
 \end{document}
