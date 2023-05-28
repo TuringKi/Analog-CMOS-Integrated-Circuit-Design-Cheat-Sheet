@@ -47,7 +47,7 @@
 \begin{document}
 
 \begin{center}{\huge{\textbf{Analog CMOS Integrated Circuit Design Cheat Sheet}}}\\
-{\large By Xiao Ma (mxlol233@outlook.com)}
+{\large By Xiao Ma (mxlol233@outlook.com)[https://github.com/TuringKi/Analog-CMOS-Integrated-Circuit-Design-Cheat-Sheet]}
 \end{center}
 \begin{multicols*}{3}
 
@@ -329,7 +329,72 @@ where:
           %------------ EXEMPLO BASICO BOX ---------------------
           \node[fancytitle, right=10pt] at (box.north west) {Transition Point Between Strong-Inversion and Velocity Saturation};
           \end{tikzpicture}
+   
+          
     
+
+          \begin{tikzpicture}
+
+
+            
+            \node [mybox] (box){%
+                \begin{minipage}{0.3\textwidth}
+      
+                  A system with $N$ frequency-dependent elements,  th transfer function in complex-frequency form:
+                  \begin{equation}
+                    H_s =  \frac{ a_0 + a_1s }{ 1+ b_1s     }
+                  \end{equation}  
+where:
+                  \begin{equation}
+                    a_0 = H^0
+                   \end{equation}  
+                   \begin{equation}
+                    b_1 = \sum_{i=1}^{N}\tau_i^0
+                   \end{equation}  
+                   \begin{equation}
+                    a_1 = \sum_{i=1}^{N}\tau_i^0 H^i
+                   \end{equation}
+                   where $H^0$ is the low-frequency gain:
+                   \begin{equation}
+                    H^0: C_1,C_2,\cdots,C_N = 0 
+                     \end{equation}
+                     or:
+                     \begin{equation}
+                      H^0: L_1,L_2,\cdots,L_N = 0 
+                       \end{equation}
+                   For capacitor:
+\begin{equation}
+  \tau_i^0 = C_i R_i^0 
+ \end{equation}
+ or for inductor:
+ \begin{equation}
+  \tau_i^0 = \frac{L_i}{R_i^0}
+ \end{equation}    
+ where $R_i^0$ is the resistance seen by the capacitor $C_i$ looking into port i with
+ all other reactive elements connected to the other ports at their zero value
+ (hence the superscript), namely open-circuited capacitors (and short circuited
+ inductors):
+ \begin{equation}
+R_i^0:  C_1,C_2,C_{i -1},C_{i + 1}, \cdots, C_N = 0
+ \end{equation}
+ or:
+ \begin{equation}
+  R_i^0: L_1,L_2,\cdots,L_{i - 1}, L_{i + 1}, \cdots, L_N = 0
+   \end{equation}
+                
+      Bandwidth estimation by 1st-order TTCs:
+      \begin{equation}
+        \omega_h \approx \frac{1}{b_1 - \frac{a_1}{a_0}} = \frac{1}{\sum_{i=1}^{N}\tau_i^0(1 - \frac{H^i}{H^0})}
+       \end{equation}  
+
+                      \end{minipage}
+            };
+            %------------ EXEMPLO BASICO BOX ---------------------
+            \node[fancytitle, right=10pt] at (box.north west) {1st Order Time-constants and Transfer-Constants (TTCs)};
+            \end{tikzpicture}
+
+
+
       
 
           \begin{tikzpicture}
@@ -339,9 +404,9 @@ where:
             \node [mybox] (box){%
                 \begin{minipage}{0.3\textwidth}
       
-                  A system with $2$ frequency-dependent elements,  th transfer function in complex-frequency form:
+                  A system with $2$ frequency-dependent elements,  th transfer function:
                   \begin{equation}
-                    H_s =  \frac{ a_0 + a_1s  +a_2s^2 }{  b_1s + b_2s^2     }
+                    H_s =  \frac{ a_0 + a_1s  +a_2s^2 }{  1+b_1s + b_2s^2     }
                   \end{equation}  
 where:
                   \begin{equation}
@@ -359,8 +424,64 @@ where:
                    \begin{equation}
                     a_2 = \tau_1^0  \tau_2^1 H^{12} = \tau_2^0 \tau_1^2  H^{12}
                    \end{equation}
+in which, $H^1$ ($H^2$) evaluated with the frequency-dependent element at the port $1$($2$) at its infinite value (i.e., shorted capacitors and
+open inductors):
+\begin{equation}
+  H^1: C_1=\infty, C_2 = 0
+\end{equation}
+\begin{equation}
+  H^2: C_1=0, C_2 = \infty
+\end{equation}
+or:
+\begin{equation}
+  H^1: L_1=\infty, L_2 = 0
+\end{equation}
+\begin{equation}
+  H^2: L_1=0, L_2 = \infty
+\end{equation}
 
-                      \end{minipage}
+                   For capacitor:
+\begin{equation}
+  \tau_1^0 = C_1 R_1^0 
+\end{equation}
+\begin{equation}
+  \tau_2^0 = C_2 R_2^0
+\end{equation}
+\begin{equation}
+  \tau_1^2 = C_1 R_1^{2} 
+\end{equation} 
+\begin{equation}
+  \tau_2^1 = C_2 R_2^{1}  
+ \end{equation}
+ or for inductor:
+ \begin{equation}
+  \tau_1^0 = \frac{L_1} { R_1^0} 
+\end{equation}
+\begin{equation}
+  \tau_2^0 =  \frac{L_2} {R_2^0}
+\end{equation}
+\begin{equation}
+  \tau_1^2 =  \frac{L_1} { R_1^{2} }
+\end{equation} 
+\begin{equation}
+  \tau_2^1 =  \frac{L_2} {R_2^{1}  }
+ \end{equation}
+ in which, $R_1^2$ is the resistance seen by $C_1$ (the subscript) when $C_2$ (the superscript)
+ is infinite valued (shorted):
+ \begin{equation}
+  R_{1}^{2} : C_2 = \infty
+ \end{equation}
+ \begin{equation}
+  R_{2}^{1} : C_1 = \infty
+ \end{equation}
+   or:
+   \begin{equation}
+    R_{1}^{2} : L_2 = \infty
+   \end{equation}
+   \begin{equation}
+    R_{2}^{1} : L_1 = \infty
+   \end{equation}                   
+\end{minipage}
             };
             %------------ EXEMPLO BASICO BOX ---------------------
             \node[fancytitle, right=10pt] at (box.north west) {2nd Order Time-constants and Transfer-Constants (TTCs)};
@@ -377,7 +498,7 @@ where:
 
                 A system with $N$ frequency-dependent elements,  th transfer function:
                 \begin{equation}
-                  H_s =  \frac{ a_0 + a_1s + a_2s^2  \cdots +a_ns^n +\cdots  }{ b_1s  + b_2s^2 \cdots +b_ns^n +\cdots     }
+                  H_s =  \frac{ a_0 + a_1s + a_2s^2  \cdots +a_ns^n +\cdots  }{1+ b_1s  + b_2s^2 \cdots +b_ns^n +\cdots     }
                 \end{equation}  
            where:
            \begin{equation}
@@ -403,14 +524,14 @@ where:
            \end{equation}  
         
 
-and for capacitor,
+and for capacitor:
 \begin{equation}
   \tau_i^0 = C_i R_i^0 
  \end{equation}
  \begin{equation}
   \tau_i^{jk\cdots} =C_i R_i^{jk\cdots} 
  \end{equation} 
- or for inductor,
+ or for inductor:
  \begin{equation}
   \tau_i^0 = \frac{L_i}{R_i^0}
  \end{equation}    
