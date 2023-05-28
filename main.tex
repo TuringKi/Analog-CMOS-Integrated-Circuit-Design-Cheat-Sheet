@@ -556,42 +556,127 @@ and for capacitor:
             
             \node [mybox] (box){%
                 \begin{minipage}{0.3\textwidth}
+                  Common Source, with resistance $R_D$:
   \begin{center}
 
                   \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
                    
+                    \coordinate (D) at (4.1,2.4);
+                    \coordinate (G) at (3,1.4);
+                    \coordinate (S) at (4.1,0.4);
+                    \coordinate (out) at (5.1,2.4);
+                    \coordinate (V_{out}) at (6.1,2.4);
+                    \coordinate (in) at (2,1.4);
+                    \coordinate (V_{in}) at (0,1.4);
+                    \coordinate (1) at (4.1,4.4);
+                    \coordinate (0) at (4.1,0);
+                    \coordinate (2) at (4.1,4.42);
+                   \ctikzset{tripoles/mos style/arrows}
+                    \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+                    \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+                    \draw[-] (out) to (V_{out});
+                    \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+                    \draw[-] (D) to (out);
+                    \draw (D) to [R, bipoles/length=0.90cm, l_={${R_D}$}, n=RD] (1);
+                    \draw[-] (S) to (0);
+                    \draw[-] (1) to (2);
+                    \draw[-] (G) to (in);
+                    \draw (D) node[circ] {};
+                    \draw (G) node[circ] {};
+                    \draw (S) node[circ] {};
+                    \draw (V_{out}) node[ocirc] {};
+                    \draw (V_{in}) node[ocirc] {};
+                    \draw (0) node[sground] {};
+                    \draw (2) node[rground, rotate=180] {};
+                    \draw[anchor=west] (4.3,4.92) node {$V_{\mathrm{DD}}$};
+                    \draw[anchor=south east] (out) node {out};
+                    \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+                    \draw[anchor=south east] (in) node {in};
+                    \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
 
-                    \coordinate (D) at (1.1,2.4);
-  \coordinate (V_i) at (0,1.4);
-  \coordinate (S) at (1.1,0.4);
-  \coordinate (V_{out}) at (3.1,2.4);
-  \coordinate (1) at (1.1,4.4);
-  \coordinate (0) at (1.1,0);
-  \coordinate (2) at (1.1,4.42);
- \ctikzset{tripoles/mos style/arrows}
-  \draw (1.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
-  \draw (M1.D) -- (D) (M1.G) -- (V_i) (M1.S) -- (S);
-  \draw[-] (D) to (V_{out});
-  \draw (D) to [R, bipoles/length=0.90cm, l_={${R_1}$}, n=R] (1);
-  \draw[-] (S) to (0);
-  \draw[-] (1) to (2);
-  \draw (D) node[circ] {};
-  \draw (V_i) node[ocirc] {};
-  \draw (S) node[circ] {};
-  \draw (V_{out}) node[ocirc] {};
-  \draw (0) node[sground] {};
-  \draw[anchor=west] (1.3,-0.5) node {ground};
-  \draw (2) node[rground, rotate=180] {};
-  \draw[anchor=west] (1.3,4.92) node {$V_{\mathrm{DD}}$};
-  \draw[anchor=south east] (D) node {D};
-  \draw[anchor=south east] (V_i) node {V$_{\mathrm{i}}$};
-  \draw[anchor=south east] (S) node {S};
-  \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
 
                   \end{tikzpicture}
                
-  \end{center}     
-  
+  \end{center} 
+  Transfer function of voltage gain in low-frequency:
+      \begin{equation}
+        A_{v}^0 =\frac{V_{out}}{V_{in}}= -g_mR_{D}
+      \end{equation}
+      consider channel-length modulation:
+      \begin{equation}
+        A_{v}^0  =\frac{V_{out}}{V_{in}}= -g_mR_{D} || r_o = -g_m\frac{R_D r_o}{R_D + r_o}
+      \end{equation}
+  Consider high-frequency gain with $3$ capacitors $c_{\pi}, c_{\mu}, c_{L}$:
+
+    \begin{center} 
+      \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+   
+        \coordinate (D) at (4.1,2.4);
+        \coordinate (G) at (3,1.4);
+        \coordinate (S) at (4.1,0.4);
+        \coordinate (out) at (5.1,2.4);
+        \coordinate (V_{out}) at (6.1,2.4);
+        \coordinate (in) at (2,1.4);
+        \coordinate (V_{in}) at (0,1.4);
+        \coordinate (1) at (4.1,4.4);
+        \coordinate (0) at (4.1,0);
+        \coordinate (2) at (4.1,4.42);
+        \coordinate (3) at (2,0.4);
+        \coordinate (5) at (2,2.4);
+        \coordinate (7) at (3.05,2.4);
+        \coordinate (4) at (2,-0);
+        \coordinate (10) at (5.1,1.4);
+        \coordinate (11) at (5.1,1);
+       \ctikzset{tripoles/mos style/arrows}
+        \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+        \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+        \draw[-] (out) to (V_{out});
+        \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+        \draw[-] (D) to (out);
+        \draw (D) to [R, bipoles/length=0.90cm, l_={${R_D}$}, n=RD] (1);
+        \draw[-] (S) to (0);
+        \draw[-] (1) to (2);
+        \draw[-] (G) to (in);
+        \draw[color=red] (in) to [C, bipoles/length=0.90cm, l_={${C_{\pi}}$}, n=C0] (3);
+        \draw[-] (in) to (5);
+        \draw[color=red] (5) to [C, bipoles/length=0.90cm, l_={${C_{\mu}}$}, n=C1] (7);
+        \draw[-] (7) to (D);
+        \draw[-] (3) to (4);
+        \draw[color=red] (out) to [C, bipoles/length=0.90cm, l_={${C_{L}}$}, n=C2] (10);
+        \draw[-] (10) to (11);
+        \draw (D) node[circ] {};
+        \draw (G) node[circ] {};
+        \draw (S) node[circ] {};
+        \draw (out) node[circ] {};
+        \draw (V_{out}) node[ocirc] {};
+        \draw (in) node[circ] {};
+        \draw (V_{in}) node[ocirc] {};
+        \draw (0) node[sground] {};
+        \draw (2) node[rground, rotate=180] {};
+        \draw[anchor=west] (4.3,4.92) node {$V_{\mathrm{DD}}$};
+        \draw (4) node[sground] {};
+        \draw (11) node[sground] {};
+        \draw[anchor=south east] (out) node {out};
+        \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+        \draw[anchor=south east] (in) node {in};
+        \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+
+      \end{tikzpicture}
+    \end{center} 
+
+    \begin{equation}
+      \tau_{\pi}^0 =  C_{\pi} (R_1 || R_{D}) 
+    \end{equation}
+    \begin{equation}
+      \tau_{\mu}^0 =  C_{\mu} (R_{left} + R_{right} + G_m R_{left} R_{right} )=C_{\mu} (R_1 + R_D + g_m R_1 R_D )
+    \end{equation}
+    \begin{equation}
+      \tau_{L}^{0} =  C_{L} R_D
+    \end{equation}
+    \begin{equation}
+      \tau_{\mu}^{\pi} =  C_{\mu} R_D
+    \end{equation}
+
                       \end{minipage}
             };
             %------------ EXEMPLO BASICO BOX ---------------------
