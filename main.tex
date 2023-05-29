@@ -800,6 +800,365 @@ and for capacitor:
               \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Source Degeneration};
               \end{tikzpicture}
 
+              \begin{tikzpicture}
+
+
+            
+                \node [mybox] (box){%
+                    \begin{minipage}{0.3\textwidth}
+  
+  
+                      Common Source, with diode-connected transistor $M2$:
+  
+                      \begin{center}
+
+    \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+      \coordinate (D) at (4.1,2.4);
+      \coordinate (G) at (3,1.4);
+      \coordinate (S) at (4.1,0.4);
+      \coordinate (out) at (5.1,2.4);
+      \coordinate (V_{out}) at (6.1,2.4);
+      \coordinate (in) at (2,1.4);
+      \coordinate (V_{in}) at (0,1.4);
+      \coordinate (S2) at (4.1,2.8);
+      \coordinate (G2) at (3,3.8);
+      \coordinate (3) at (2.6,3.8);
+      \coordinate (4) at (2.6,5.2);
+      \coordinate (5) at (4.1,5.2);
+      \coordinate (D2) at (4.1,4.8);
+      \coordinate (0) at (4.1,0);
+      \coordinate (2) at (4.1,5.6);
+     \ctikzset{tripoles/mos style/arrows}
+      \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+      \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+      \draw[-] (out) to (V_{out});
+      \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+      \draw[-] (D) to (out);
+      \draw[-] (D) to (S2);
+      \draw[-] (G2) to (3);
+      \draw[-] (3) to (4);
+      \draw[-] (4) to (5);
+      \draw (4.1,3.8) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+      \draw (M2.D) -- (D2) (M2.G) -- (G2) (M2.S) -- (S2);
+      \draw[-] (S) to (0);
+      \draw[-] (D2) to (5);
+      \draw[-] (5) to (2);
+      \draw[-] (G) to (in);
+      \draw (D) node[circ] {};
+      \draw (G) node[circ] {};
+      \draw (S) node[circ] {};
+      \draw (V_{out}) node[ocirc] {};
+      \draw (V_{in}) node[ocirc] {};
+      \draw (5) node[circ] {};
+      \draw (0) node[sground] {};
+      \draw (2) node[rground, rotate=180] {};
+      \draw[anchor=west] (4.3,6.1) node {$V_{\mathrm{DD}}$};
+      \draw[anchor=south east] (out) node {out};
+      \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+      \draw[anchor=south east] (in) node {in};
+      \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+    \end{tikzpicture}
+
+
+  \end{center}
+Consider body effect and channel-length modulation, the equivalent resistance at point $out$ look into $M2$: 
+\begin{equation}
+  R_{out,up} = \frac{1}{g_{m2} + g_{mb2}} || r_o
+\end{equation}
+With negligible channel-length modulation, we have the low frequency gain:
+\begin{equation}
+  A_v^0 = -g_{m1} \frac{1}{g_{m2} + g_{mb2}} = - \frac{g_{m1}}{g_{m2}} \frac{1}{1 + \eta}
+\end{equation}
+where:
+\begin{equation}
+\frac{1}{1 + \eta} = \frac{g_{mb2}}{g_{m2}}
+\end{equation}
+Since $I_{DS}$ is same  at $M1$ and $M2$ (from drain to source), we have:
+\begin{equation}
+  A_v^0 = - \sqrt{\frac{W_1 / L_1}{W_2 / L_2} } \frac{1}{1 + \eta}
+  \end{equation} 
+  If we replace nmos $M2$ with pmos, the body effect of $M2$ will disappear:
+  \begin{equation}
+    A_v^0 = - \sqrt{\frac{\mu_n  W_1 / L_1}{\mu_p W_2 / L_2} }
+    \end{equation} 
+                          \end{minipage}
+                };
+                %------------ EXEMPLO BASICO BOX ---------------------
+                \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Diode-Connected Load};
+                \end{tikzpicture}
+
+
+
+    
+                
+                \begin{tikzpicture}
+
+
+            
+                  \node [mybox] (box){%
+                      \begin{minipage}{0.3\textwidth}
+    $M2$ works as a current source:
+                        \begin{center}
+
+
+                          \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+                            \coordinate (D) at (4.1,2.4);
+                            \coordinate (G) at (3,1.4);
+                            \coordinate (S) at (4.1,0.4);
+                            \coordinate (out) at (5.1,2.4);
+                            \coordinate (V_{out}) at (6.1,2.4);
+                            \coordinate (G2) at (3,3.8);
+                            \coordinate (V_{b}) at (2,3.8);
+                            \coordinate (in) at (2,1.4);
+                            \coordinate (V_{in}) at (0,1.4);
+                            \coordinate (S2) at (4.1,2.8);
+                            \coordinate (D2) at (4.1,4.8);
+                            \coordinate (0) at (4.1,0);
+                            \coordinate (5) at (4.1,5.2);
+                            \coordinate (2) at (4.1,5.6);
+                           \ctikzset{tripoles/mos style/arrows}
+                            \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+                            \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+                            \draw[-] (out) to (V_{out});
+                            \draw[-] (G2) to (V_{b});
+                            \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+                            \draw[-] (D) to (out);
+                            \draw[-] (D) to (S2);
+                            \draw (4.1,3.8) node[pmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+                            \draw (M2.D) -- (S2) (M2.G) -- (G2) (M2.S) -- (D2);
+                            \draw[-] (S) to (0);
+                            \draw[-] (D2) to (5);
+                            \draw[-] (5) to (2);
+                            \draw[-] (G) to (in);
+                            \draw (D) node[circ] {};
+                            \draw (G) node[circ] {};
+                            \draw (S) node[circ] {};
+                            \draw (V_{out}) node[ocirc] {};
+                            \draw (V_{b}) node[ocirc] {};
+                            \draw (V_{in}) node[ocirc] {};
+                            \draw (0) node[sground] {};
+                            \draw (2) node[rground, rotate=180] {};
+                            \draw[anchor=west] (4.3,6.1) node {$V_{\mathrm{DD}}$};
+                            \draw[anchor=south east] (out) node {out};
+                            \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+                            \draw[anchor=south east] (G2) node {G2};
+                            \draw[anchor=south east] (V_{b}) node {V$_{\mathrm{{b}}}$};
+                            \draw[anchor=south east] (in) node {in};
+                            \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+                          \end{tikzpicture}
+                        
+                        
+                        \end{center}
+The low frequency gain:                    
+                        \begin{equation}
+                          A_v^0 = - g_{m1}(r_{o1} || r_{o2})
+                          \end{equation} 
+
+      
+                            \end{minipage}
+                  };
+                  %------------ EXEMPLO BASICO BOX ---------------------
+                  \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Current-Source Load};
+                  \end{tikzpicture}
+    
+
+                  \begin{tikzpicture}
+
+
+            
+                    \node [mybox] (box){%
+                        \begin{minipage}{0.3\textwidth}
+      
+      
+\begin{center}
+
+  \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+    \coordinate (D) at (4.1,2.4);
+    \coordinate (G) at (3,1.4);
+    \coordinate (S) at (4.1,0.4);
+    \coordinate (out) at (5.1,2.4);
+    \coordinate (V_{out}) at (6.1,2.4);
+    \coordinate (in) at (2,1.4);
+    \coordinate (V_{in}) at (0,1.4);
+    \coordinate (S2) at (4.1,2.8);
+    \coordinate (G2) at (2,3.8);
+    \coordinate (D2) at (4.1,4.8);
+    \coordinate (0) at (4.1,0);
+    \coordinate (5) at (4.1,5.2);
+    \coordinate (2) at (4.1,5.6);
+   \ctikzset{tripoles/mos style/arrows}
+    \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+    \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+    \draw[-] (out) to (V_{out});
+    \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+    \draw[-] (D) to (out);
+    \draw[-] (D) to (S2);
+    \draw (4.1,3.8) node[pmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+    \draw (M2.D) -- (S2) (M2.G) -- (G2) (M2.S) -- (D2);
+    \draw[-] (G2) to (in);
+    \draw[-] (S) to (0);
+    \draw[-] (D2) to (5);
+    \draw[-] (5) to (2);
+    \draw[-] (G) to (in);
+    \draw (D) node[circ] {};
+    \draw (G) node[circ] {};
+    \draw (S) node[circ] {};
+    \draw (V_{out}) node[ocirc] {};
+    \draw (in) node[circ] {};
+    \draw (V_{in}) node[ocirc] {};
+    \draw (0) node[sground] {};
+    \draw (2) node[rground, rotate=180] {};
+    \draw[anchor=west] (4.3,6.1) node {$V_{\mathrm{DD}}$};
+    \draw[anchor=south east] (out) node {out};
+    \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+    \draw[anchor=south east] (in) node {in};
+    \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+  \end{tikzpicture}
+
+\end{center}
+The low frequency gain:                    
+                        \begin{equation}
+                          A_v^0 = - (g_{m1} + g_{m2} )(r_{o1} || r_{o2})
+                          \end{equation} 
+        
+                              \end{minipage}
+                    };
+                    %------------ EXEMPLO BASICO BOX ---------------------
+                    \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Source (CS), with Active Load};
+                    \end{tikzpicture}
+
+
+
+                    \begin{tikzpicture}
+
+
+            
+                      \node [mybox] (box){%
+                          \begin{minipage}{0.3\textwidth}
+        
+
+                            \begin{center}
+                            \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+                              \coordinate (D) at (4.1,3.4);
+                              \coordinate (G) at (3,2.4);
+                              \coordinate (S) at (4.1,1.4);
+                              \coordinate (V_{out}) at (5.1,1.4);
+                              \coordinate (in) at (2,2.4);
+                              \coordinate (V_{in}) at (0,2.4);
+                              \coordinate (3) at (4.1,0.4);
+                              \coordinate (0) at (4.1,0);
+                              \coordinate (2) at (4.1,3.6);
+                             \ctikzset{tripoles/mos style/arrows}
+                              \draw (4.1,2.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+                              \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+                              \draw[-] (S) to (V_{out});
+                              \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+                              \draw (S) to [R, bipoles/length=0.75cm, l_={${R_S}$}, n=RS] (3);
+                              \draw[-] (3) to (0);
+                              \draw[-] (D) to (2);
+                              \draw[-] (G) to (in);
+                              \draw (D) node[circ] {};
+                              \draw (G) node[circ] {};
+                              \draw (S) node[circ] {};
+                              \draw (V_{out}) node[ocirc] {};
+                              \draw (V_{in}) node[ocirc] {};
+                              \draw (0) node[sground] {};
+                              \draw (2) node[rground, rotate=180] {};
+                              \draw[anchor=west] (4.3,4.1) node {$V_{\mathrm{DD}}$};
+                              \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+                              \draw[anchor=south east] (in) node {in};
+                              \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+                            \end{tikzpicture}
+                          \end{center}
+                          The low frequency gain:                    
+                          \begin{equation}
+                            A_v^0 =  \frac{g_m R_S}{1 + (g_{m} + g_{mb})R_S}
+                            \end{equation} 
+        The equivalent resistance at point $out$ look up into $M1$:
+        \begin{equation}
+          R_{out, up} =  \frac{1}{g_m + g_{mb}} || r_o
+          \end{equation} 
+          
+                                \end{minipage}
+                      };
+                      %------------ EXEMPLO BASICO BOX ---------------------
+                      \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Drain (CD) or Source Follower};
+                      \end{tikzpicture}
+
+
+                      \begin{tikzpicture}
+
+
+            
+                        \node [mybox] (box){%
+                            \begin{minipage}{0.3\textwidth}
+          
+                              \begin{center}
+
+                                \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+                                  
+                              
+                                  \coordinate (D) at (4.1,2.4);
+                                  \coordinate (G) at (3,1.4);
+                                  \coordinate (S) at (4.1,0.4);
+                                  \coordinate (out) at (5.1,2.4);
+                                  \coordinate (V_{out}) at (6.1,2.4);
+                                  \coordinate (V_{b}) at (2,1.4);
+                                  \coordinate (in) at (2,3.8);
+                                  \coordinate (V_{in}) at (0,3.8);
+                                  \coordinate (S2) at (4.1,2.8);
+                                  \coordinate (D2) at (4.1,4.8);
+                                  \coordinate (G2) at (3,3.8);
+                                  \coordinate (0) at (4.1,0);
+                                  \coordinate (5) at (4.1,5.2);
+                                  \coordinate (2) at (4.1,5.6);
+                                 \ctikzset{tripoles/mos style/arrows}
+                                  \draw (4.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+                                  \draw (M2.D) -- (D) (M2.G) -- (G) (M2.S) -- (S);
+                                  \draw[-] (out) to (V_{out});
+                                  \draw[-] (G) to (V_{b});
+                                  \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+                                  \draw[-] (D) to (out);
+                                  \draw[-] (D) to (S2);
+                                  \draw (4.1,3.8) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+                                  \draw (M1.D) -- (D2) (M1.G) -- (G2) (M1.S) -- (S2);
+                                  \draw[-] (S) to (0);
+                                  \draw[-] (D2) to (5);
+                                  \draw[-] (5) to (2);
+                                  \draw[-] (G2) to (in);
+                                  \draw (D) node[circ] {};
+                                  \draw (G) node[circ] {};
+                                  \draw (S) node[circ] {};
+                                  \draw (V_{out}) node[ocirc] {};
+                                  \draw (V_{b}) node[ocirc] {};
+                                  \draw (V_{in}) node[ocirc] {};
+                                  \draw (0) node[sground] {};
+                                  \draw (2) node[rground, rotate=180] {};
+                                  \draw[anchor=west] (4.3,6.1) node {$V_{\mathrm{DD}}$};
+                                  \draw[anchor=south east] (out) node {out};
+                                  \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+                                  \draw[anchor=south east] (V_{b}) node {V$_{\mathrm{{b}}}$};
+                                  \draw[anchor=south east] (in) node {in};
+                                  \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+                              
+                                \end{tikzpicture}
+                              
+                              \end{center}
+                              The low frequency gain:                    
+                              \begin{equation}
+                                A_v^0 =  \frac{R_{eq}}{R_{eq} + \frac{1}{g_{m1}}}
+                                \end{equation} 
+where:
+\begin{equation}
+  R_{eq} = \frac{1}{g_{mb1}}|| r_{o1} || r_{o2}
+  \end{equation}
+            
+                                  \end{minipage}
+                        };
+                        %------------ EXEMPLO BASICO BOX ---------------------
+                        \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Drain (CD) or Source Follower, With Transistor Load};
+                        \end{tikzpicture}
+
 
 
 
@@ -809,7 +1168,6 @@ and for capacitor:
             
               \node [mybox] (box){%
                   \begin{minipage}{0.3\textwidth}
-
 
   
                         \end{minipage}
