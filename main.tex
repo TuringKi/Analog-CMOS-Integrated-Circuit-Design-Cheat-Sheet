@@ -1161,6 +1161,82 @@ where:
 
 
 
+                        \begin{tikzpicture}
+
+
+            
+                          \node [mybox] (box){%
+                              \begin{minipage}{0.3\textwidth}
+            $M_2$ works as current source, $C_1$ is  coupled capacitor:
+\begin{center}
+  \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+    \coordinate (D) at (3,2.4);
+    \coordinate (G) at (1.9,1.4);
+    \coordinate (S) at (3,0.4);
+    \coordinate (in) at (1,2.4);
+    \coordinate (V_{in}) at (0,2.4);
+    \coordinate (G2) at (1.9,3.8);
+    \coordinate (V_{b1}) at (0.9,3.8);
+    \coordinate (V_{b2}) at (0.9,1.4);
+    \coordinate (out) at (3,4.8);
+    \coordinate (V_{out}) at (4,4.8);
+    \coordinate (0) at (2,2.4);
+    \coordinate (S2) at (3,2.8);
+    \coordinate (5) at (3,5.2);
+    \coordinate (6) at (3,6.2);
+    \coordinate (2) at (3,6.6);
+    \coordinate (0_split0) at (3,0);
+   \ctikzset{tripoles/mos style/arrows}
+    \draw (3,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+    \draw (M2.D) -- (D) (M2.G) -- (G) (M2.S) -- (S);
+    \draw[-] (in) to (V_{in});
+    \draw[-] (G2) to (V_{b1});
+    \draw[-] (G) to (V_{b2});
+    \draw[-] (out) to (V_{out});
+    \draw[-] (D) to (0);
+    \draw[-] (D) to (S2);
+    \draw (0) to [C, l_=$C_{1}$, n=C1] (in);
+    \draw (3,3.8) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+    \draw (M1.D) -- (out) (M1.G) -- (G2) (M1.S) -- (S2);
+    \draw[-] (S) to (0_split0);
+    \draw[-] (out) to (5);
+    \draw (5) to [R, bipoles/length=0.75cm, l_=$R_{D}$, n=RD] (6);
+    \draw[-] (6) to (2);
+    \draw (D) node[circ] {};
+    \draw (G) node[circ] {};
+    \draw (S) node[circ] {};
+    \draw (V_{in}) node[ocirc] {};
+    \draw (V_{b1}) node[ocirc] {};
+    \draw (V_{b2}) node[ocirc] {};
+    \draw (out) node[circ] {};
+    \draw (V_{out}) node[ocirc] {};
+    \draw (0_split0) node[sground] {};
+    \draw (2) node[rground, rotate=180] {};
+    \draw[anchor=west] (3.2,7.1) node {$V_{\mathrm{DD}}$};
+    \draw[anchor=south east] (in) node {in};
+    \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+    \draw[anchor=south east] (G2) node {G2};
+    \draw[anchor=south east] (V_{b1}) node {V$_{\mathrm{{b1}}}$};
+    \draw[anchor=south east] (V_{b2}) node {V$_{\mathrm{{b2}}}$};
+    \draw[anchor=south east] (out) node {out};
+    \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+  \end{tikzpicture}
+
+\end{center}
+The low frequency voltage gain:
+\begin{equation}
+  A_v^0 = g_m(1+\eta)R_D
+\end{equation}
+              
+                                    \end{minipage}
+                          };
+                          %------------ EXEMPLO BASICO BOX ---------------------
+                          \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Gate (CG)};
+                          \end{tikzpicture}
+            
+
+
+
 
             \begin{tikzpicture}
 
