@@ -1078,8 +1078,112 @@ The low frequency gain:
         \begin{equation}
           R_{out, up} =  \frac{1}{g_m + g_{mb}} || r_o
           \end{equation} 
-          
-                                \end{minipage}
+
+          Consider high-frequency gain with $3$ capacitors:
+\begin{center}
+
+  \begin{tikzpicture}[scale=1.00, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+    \coordinate (D) at (5,3.8);
+    \coordinate (G) at (3,2.8);
+    \coordinate (S) at (5,1.8);
+    \coordinate (out) at (6,1.8);
+    \coordinate (V_{out}) at (7,1.8);
+    \coordinate (in) at (2,2.8);
+    \coordinate (V_{in}) at (0,2.8);
+    \coordinate (3) at (5,0.8);
+    \coordinate (0) at (5,0.4);
+    \coordinate (2) at (5,4);
+    \coordinate (6) at (3,3.8);
+    \coordinate (7) at (4,3.8);
+    \coordinate (8) at (3,1.8);
+    \coordinate (9) at (4,1.8);
+    \coordinate (10) at (6,1.4);
+    \coordinate (11) at (6,0.4);
+    \coordinate (12) at (6,0);
+   \ctikzset{tripoles/mos style/arrows}
+    \draw (5,2.8) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+    \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+    \draw[-] (S) to (out);
+    \draw[-] (out) to (V_{out});
+    \draw (in) to [R, bipoles/length=0.75cm, l_={${R_1}$}, n=R1] (V_{in});
+    \draw (S) to [R, bipoles/length=0.75cm, l_={${R_S}$}, n=RS] (3);
+    \draw[-] (3) to (0);
+    \draw[-] (D) to (2);
+    \draw[-] (G) to (in);
+    \draw[-] (G) to (6);
+    \draw[color=red] (6) to [C, bipoles/length=0.75cm, l_={${C_{\mu}}$}, n=C1] (7);
+    \draw[-] (7) to (D);
+    \draw[-] (G) to (8);
+    \draw[color=red] (8) to [C, bipoles/length=0.75cm, l_={${C_{\pi}}$}, n=C2] (9);
+    \draw[-] (9) to (S);
+    \draw[-] (out) to (10);
+    \draw[color=red] (10) to [C, bipoles/length=0.75cm, l_={${C_{L}}$}, n=C3] (11);
+    \draw[-] (11) to (12);
+    \draw (D) node[circ] {};
+    \draw (G) node[circ] {};
+    \draw (S) node[circ] {};
+    \draw (out) node[circ] {};
+    \draw (V_{out}) node[ocirc] {};
+    \draw (V_{in}) node[ocirc] {};
+    \draw (0) node[sground] {};
+    \draw (2) node[rground, rotate=180] {};
+    \draw[anchor=west] (5.2,4.5) node {$V_{\mathrm{DD}}$};
+    \draw (12) node[sground] {};
+    \draw[anchor=south east] (out) node {out};
+    \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+    \draw[anchor=south east] (in) node {in};
+    \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+  \end{tikzpicture}
+
+
+\end{center}
+We have:
+\begin{equation}
+\tau_{\mu}^{0} = C_{\mu} R_1
+\end{equation}
+\begin{equation}
+  \tau_{\pi}^{0} = C_{\pi} \frac{R_1 + R_S}{1 + g_m R_S}
+  \end{equation}
+  \begin{equation}
+    \tau_{L}^{0} = C_L (r_m || R_S)
+    \end{equation}
+    \begin{equation}
+      \tau_{L}^{\pi} = C_L (R_1 || R_S)
+      \end{equation}
+      \begin{equation}
+        \tau_{\mu}^{L} = C_L R_1
+        \end{equation}    
+        \begin{equation}
+      H^{\mu} = H^{L} = 0
+          \end{equation}
+\begin{equation}
+            H^{\pi} = \frac{R_S}{R_1 + R_S}
+\end{equation}
+\begin{equation}
+  b_1 = C_{\mu}R_1 + C_{\pi} \frac{R_1 + R_S}{1 + g_m R_S} + C_L (r_m || R_S)
+\end{equation}
+\begin{equation}
+  a_1 = C_{\pi} \frac{1}{1 + g_m R_S}
+\end{equation} 
+\begin{equation}
+  b_2 =  \frac{R_1 R_S}{1 + g_m R_S}(C_{\pi} C_{\mu} + C_{\pi} C_L) + C_{L} C_{\mu} (r_m || R_S) R_1
+\end{equation}
+\begin{equation}
+a_2 = b_3 = a_3 = 0
+\end{equation}
+We ignore body effect:
+\begin{equation}
+  a_0 =  \frac{g_m R_S}{1 + g_m R_S}
+\end{equation} 
+Now we have the high frequency voltage gain in $s$ domain:
+\begin{equation}
+A_v(s) = \frac{g_m R_S + C_{\pi}s}{1 + g_m R_S + [(C_{\mu}g_m R_1 + C_{\pi} + C_L)R_S + (C_{\mu} + C_{\pi})R_1]s + R_1 R_S \Delta C^2 s^2} 
+\end{equation}
+where,
+\begin{equation}
+  \Delta C^2 = C_{\mu} C_{\pi} + C_{\pi} C_L +   C_{\mu} C_L
+\end{equation}
+        \end{minipage}
                       };
                       %------------ EXEMPLO BASICO BOX ---------------------
                       \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Drain (CD) or Source Follower};
@@ -1234,6 +1338,90 @@ The low frequency voltage gain:
                           \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Common Gate (CG)};
                           \end{tikzpicture}
             
+
+
+                          \begin{tikzpicture}
+
+
+            
+                            \node [mybox] (box){%
+                                \begin{minipage}{0.3\textwidth}
+            $M_3$ and $M_4$ are formed the cascode current source:
+                                  \begin{center}
+                \begin{tikzpicture}[scale=0.8, transform shape, /tikz/circuitikz/bipoles/length=1.50cm, american currents, american voltages, voltage dir=RP]
+                
+                  \coordinate (D) at (2.1,2.4);
+                  \coordinate (G) at (1,1.4);
+                  \coordinate (S) at (2.1,0.4);
+                  \coordinate (G2) at (1,3.8);
+                  \coordinate (V_{b2}) at (0,3.8);
+                  \coordinate (V_{in}) at (0,1.4);
+                  \coordinate (G3) at (1,6.8);
+                  \coordinate (V_{b3}) at (0,6.8);
+                  \coordinate (G4) at (1,8.8);
+                  \coordinate (V_{b4}) at (0,8.8);
+                  \coordinate (out) at (2.1,4.8);
+                  \coordinate (V_{out}) at (3.1,4.8);
+                  \coordinate (S2) at (2.1,2.8);
+                  \coordinate (0) at (2.1,0);
+                  \coordinate (5) at (2.1,5.8);
+                  \coordinate (6) at (2.1,7.8);
+                  \coordinate (7) at (2.1,9.8);
+                  \coordinate (2) at (2.1,10.8);
+                 \ctikzset{tripoles/mos style/arrows}
+                  \draw (2.1,1.4) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M1) {$M_{1}$};
+                  \draw (M1.D) -- (D) (M1.G) -- (G) (M1.S) -- (S);
+                  \draw[-] (G2) to (V_{b2});
+                  \draw[-] (G) to (V_{in});
+                  \draw[-] (G3) to (V_{b3});
+                  \draw[-] (G4) to (V_{b4});
+                  \draw[-] (out) to (V_{out});
+                  \draw[-] (D) to (S2);
+                  \draw (2.1,3.8) node[nmos, , xscale=1.0, yscale=1.0, rotate=0] (M2) {$M_{2}$};
+                  \draw (M2.D) -- (out) (M2.G) -- (G2) (M2.S) -- (S2);
+                  \draw[-] (S) to (0);
+                  \draw[-] (out) to (5);
+                  \draw (2.1,6.8) node[pmos, , xscale=1.0, yscale=1.0, rotate=0] (M3) {$M_{3}$};
+                  \draw (M3.D) -- (5) (M3.G) -- (G3) (M3.S) -- (6);
+                  \draw (2.1,8.8) node[pmos, , xscale=1.0, yscale=1.0, rotate=0] (M4) {$M_{4}$};
+                  \draw (M4.D) -- (6) (M4.G) -- (G4) (M4.S) -- (7);
+                  \draw[-] (7) to (2);
+                  \draw (D) node[circ] {};
+                  \draw (G) node[circ] {};
+                  \draw (S) node[circ] {};
+                  \draw (V_{b2}) node[ocirc] {};
+                  \draw (V_{in}) node[ocirc] {};
+                  \draw (V_{b3}) node[ocirc] {};
+                  \draw (V_{b4}) node[ocirc] {};
+                  \draw (out) node[circ] {};
+                  \draw (V_{out}) node[ocirc] {};
+                  \draw (0) node[sground] {};
+                  \draw (2) node[rground, rotate=180] {};
+                  \draw[anchor=west] (2.3,11.3) node {$V_{\mathrm{DD}}$};
+                  \draw[anchor=south east] (G2) node {G2};
+                  \draw[anchor=south east] (V_{b2}) node {V$_{\mathrm{{b2}}}$};
+                  \draw[anchor=south east] (V_{in}) node {V$_{\mathrm{{in}}}$};
+                  \draw[anchor=south east] (G3) node {G3};
+                  \draw[anchor=south east] (V_{b3}) node {V$_{\mathrm{{b3}}}$};
+                  \draw[anchor=south east] (G4) node {G4};
+                  \draw[anchor=south east] (V_{b4}) node {V$_{\mathrm{{b4}}}$};
+                  \draw[anchor=south east] (out) node {out};
+                  \draw[anchor=south east] (V_{out}) node {V$_{\mathrm{{out}}}$};
+
+
+                \end{tikzpicture}
+              \end{center}
+              The low frequency voltage gain:
+              \begin{equation}
+                A_v^0 \approx -g_{m1} ( g_{m2}r_{o1} r_{o2} || g_{m3}r_{o3}r_{o4})
+              \end{equation}
+                
+                                      \end{minipage}
+                            };
+                            %------------ EXEMPLO BASICO BOX ---------------------
+                            \node[fancytitle, right=10pt] at (box.north west) {Single Stage Amplifier: Cascode};
+                            \end{tikzpicture}
+              
 
 
 
