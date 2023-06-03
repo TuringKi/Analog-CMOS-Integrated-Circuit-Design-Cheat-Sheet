@@ -369,16 +369,36 @@ R_i^0:  C_1,C_2,C_{i -1},C_{i + 1}, \cdots, C_N = 0
   R_i^0: L_1,L_2,\cdots,L_{i - 1}, L_{i + 1}, \cdots, L_N = 0
    \end{equation}
                 
-      Bandwidth estimation by 1st-order TTCs:
+      Hight bandwidth frequency estimation by 1st-order TTCs:
       \begin{equation}
         \omega_h \approx \frac{1}{b_1 - \frac{a_1}{a_0}} = \frac{1}{\sum_{i=1}^{N}\tau_i^0(1 - \frac{H^i}{H^0})}
        \end{equation}  
-
+Meanwhile, define:
+\begin{equation}
+  R_i^{\infty}:  C_1,C_2,C_{i -1},C_{i + 1}, \cdots, C_N = \infty
+   \end{equation}
+   or:
+   \begin{equation}
+    R_i^{\infty}: L_1,L_2,\cdots,L_{i - 1}, L_{i + 1}, \cdots, L_N = \infty
+     \end{equation}
+  
+    \begin{equation}
+    \tau_i^{\infty} = C_i R_i^{\infty}
+    \end{equation}
+    or for inductor:
+    \begin{equation}
+    \tau_i^{\infty} = \frac{L_i}{R_i^{\infty}}
+     \end{equation} 
+Low bandwidth frequency estimation:
+\begin{equation}
+  \omega_l \approx \sum_{i=0}^{N}\frac{1}{\tau_i^{\infty}}
+  \end{equation} 
                       \end{minipage}
             };
             %------------ EXEMPLO BASICO BOX ---------------------
             \node[fancytitle, right=10pt] at (box.north west) {1st Order Time-constants and Transfer-Constants (TTCs)};
             \end{tikzpicture}
+
 
 
 
@@ -475,7 +495,60 @@ or:
             \end{tikzpicture}
 
 
- 
+
+\begin{tikzpicture}
+
+
+
+  \node [mybox] (box){%
+      \begin{minipage}{0.3\textwidth}
+        Considering a common source amplifier with one load capacitor $C_L$ and one drain resistor $R_D$, 
+        its low frequency voltage gain is:
+        \begin{equation}
+          A_v^{0} = -g_m R_D 
+         \end{equation}  
+From 1-st order TTCs, we have the high frequency voltage gain:
+\begin{equation}
+  A_v(s) = \frac{-g_m R_D}{1 + C_L R_D s} 
+ \end{equation}
+ and high bandwidth frequency:
+ \begin{equation}
+  \omega_h = \frac{1}{C_L R_D} 
+ \end{equation}
+ Define the bandwidth-gain product:
+ \begin{equation}
+\omega_u \equiv |A_v^0| \omega_h = \frac{g_m}{C_L } 
+ \end{equation}
+ The magnitude of the total gain for $N$ amplifiers connected 
+ in series with the same gain is:
+ \begin{equation}
+  |A_{v, total}(s)|  =(\frac{-g_m R_D}{1 + C_L R_D s} )^N 
+   \end{equation}
+Let $|A_{v, total}(s)|$ equation to $\frac{1}{2}(-g_m R_D)^N$,
+which is $-2 dB$ points, get the high bandwidth frequency:
+\begin{equation}
+  \omega_{h,total} =  \omega_{h} \sqrt{2^{\frac{1}{N}} - 1} = \frac{\omega_u}{|A_v^0|}\sqrt{2^{\frac{1}{N}} - 1} =  \frac{\omega_u}{|A_{v, total}^0|^{\frac{1}{N}}}\sqrt{2^{\frac{1}{N}} - 1}
+ \end{equation}
+the ratio between $N$ stages $\omega_{h,total}$ and one stage $\omega_h^{'}$ with
+same gain:
+\begin{equation}
+\frac{\omega_{h,total}}{\omega_h^{'}} = \frac{\frac{\omega_u}{|A_{v, total}^0|^{\frac{1}{N}}}\sqrt{2^{\frac{1}{N}} - 1}}{ \frac{\omega_u}{|A_{v, total}^0|}} = |A_{v, total}^0|^{1 - \frac{1}{N}}\sqrt{2^{\frac{1}{N}} - 1}
+\end{equation}
+The stages number $N_{opt}$ where the $\frac{\omega_{h,total}}{\omega_h^{'}}$ is maximum:
+\begin{equation}
+  N_{opt} \approx 1.85 ln(|A_{v, total}^0|)
+   \end{equation}
+The optimal gain for each of the stages:
+\begin{equation}
+  A_{v,opt}^0 = e -1
+   \end{equation}
+
+            \end{minipage}
+  };
+  %------------ EXEMPLO BASICO BOX ---------------------
+  \node[fancytitle, right=10pt] at (box.north west) {Bandwith-gain Product And Optimal Stages};
+  \end{tikzpicture}
+
           \begin{tikzpicture}
 
 
