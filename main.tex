@@ -1634,6 +1634,106 @@ when $R_S \to 0$:
 
 
 
+ \begin{tikzpicture}
+
+
+            
+              \node [mybox] (box){%
+                  \begin{minipage}{0.3\textwidth}
+                    The idea asymptotic transfer function:
+                    \begin{equation}
+                      H_{\infty} = H |_{k \to \infty} = \lim_{k \to \infty}\frac{kA}{ 1 + kAf} = \frac{1}{f}
+                    \end{equation}
+ In $s$ domain:
+ \begin{equation}
+  H(s) = \frac{kA(s)}{ 1 + kA(s)f} 
+\end{equation}
+let $s=j\omega$, if $|A(j\omega)f| \gg 1$:
+\begin{equation}
+  H(s) = \frac{1}{f}
+\end{equation}
+$|A(j\omega)f| \ll 1$:
+\begin{equation}
+  H(s) = A(s)
+\end{equation}
+This indicates that the transfer function is very stable when the amplitude is large, 
+and the transfer function is independent of feedback when the amplitude is small.
+
+Given an open loop transfer function:
+\begin{equation}
+  A(s) = \frac{A_0}{1 + \tau_1 s}
+\end{equation}
+in the middle (not too large and not too small):
+\begin{equation}
+  H(s) = \frac{A_0}{1 + A_0f}\frac{1}{1 + \frac{\tau_1}{1 + A_0 f}s}
+\end{equation}
+we have an equivalent $\tau'_1$:
+\begin{equation}
+  \tau'_1 =\frac{\tau_1}{1 + A_0 f}
+\end{equation}
+Transfer function sensitivity:
+\begin{equation}
+  \frac{\Delta H}{H} = \frac{\Delta A}{A} \frac{1}{1 + Af}
+\end{equation}
+\begin{equation}
+  \frac{\Delta H}{H} = \frac{\Delta f}{f} \frac{Af}{1 + Af}
+\end{equation}
+That is to say, when the gain A is large enough, 
+the sensitivity of the transfer function is mainly determined by the feedback part.
+
+Given an nonlinear transfer function $g$, and let:
+\begin{equation}
+ y = g[A(x - fy)]
+\end{equation}
+which means:
+\begin{equation}
+  x = fy + \frac{g^{-1}(y)}{A}
+ \end{equation}
+if $A$ is large enough,
+\begin{equation}
+  \frac{y}{x} = \frac{1}{f} = H_{\infty}
+ \end{equation}
+ that says, the feedback can make output and input to be linear. 
+
+For certain source device, we define the asymptotic transfer function:
+\begin{equation}
+  H = H_{\infty}\frac{T}{1 + T} + H_0 \frac{1}{1 + T}
+ \end{equation}
+ where $T$ is the return ratio of this source, And
+ \begin{equation}
+  H_{0} = H |_{k \to 0}
+ \end{equation}
+
+ Blackman Formula:
+ \begin{equation}
+  Z = Z_0\frac{1 + T_{sc}}{ 1 + T_{oc}}
+ \end{equation}
+
+Serial makes impedance up.
+
+Shunt makes impedance down.
+
+
+Loop gain:
+\begin{equation}
+  \bold{T} = - \frac{u_y}{u_x} 
+ \end{equation}
+for Unilateral:
+ \begin{equation}
+  \frac{1}{\bold{T}} = \frac{1}{\bold{T_v}} + \frac{1}{\bold{T_i}}
+ \end{equation}
+ Bilateral:
+ \begin{equation}
+  \frac{1}{\bold{T}} = \frac{1}{\bold{T_v}} + \frac{1}{\bold{T_i}} + \frac{\bold{T_{i, revert}}}{\bold{T_{v, forward}}}
+ \end{equation}
+\end{minipage}
+              };
+              %------------ EXEMPLO BASICO BOX ---------------------
+              \node[fancytitle, right=10pt] at (box.north west) {Feedback};
+              \end{tikzpicture}
+
+
+
 
             % \begin{tikzpicture}
 
