@@ -1734,6 +1734,67 @@ for Unilateral:
 
 
 
+\begin{tikzpicture}
+
+
+\node [mybox] (box){%
+\begin{minipage}{0.3\textwidth}
+For a feedback system, the close loop gain:
+\begin{equation}
+  A_f = \frac{A}{ 1+ A f} =   \frac{A}{ 1+ \bold{T}}   
+ \end{equation}
+where $\bold{T}$ is the loop gain.
+
+We assume the open loop gain $A$ has no poles and zeros in RHP, 
+then the stability of feedback system is determined by 
+the roots of 
+$1+ \bold{T} =0$.
+
+If one of the roots is located in RHP, the system is unstable.
+
+Nyquist criteria: 
+if the polar plot of $ 1+ \bold{T}$ encircles the origin, then the polar plot of $\bold{T}$ 
+encircles the
+point $(-1, 0)$ because the latter is obtained by shifting the former to the left by one unit.
+Nyquist's theorem articulates this result as for a closed-loop system, $\frac{A}{ 1+ \bold{T}} $, 
+to be stable,
+the polar plot of $\bold{T}$  must not encircle the point $(-1, 0)$  clockwise as $s$
+traverses a contour around the
+critical region clockwise.
+
+The condition of feedback system is unstable:
+\begin{equation}
+  \bold{T} = -1
+ \end{equation}
+which implies:
+\begin{equation}
+  \bold{T}(j\omega)|_{\omega = \theta} = e^{j\theta}
+ \end{equation}
+where $\theta = \pi $.
+Now we consider phase margin and gain margin. 
+
+Suppose $\theta_m$ is the phase margin about $\pi$ when the amplitude is $1$:
+\begin{equation}
+  \bold{T} = e^{\theta_m - \pi} = -e^{\theta_m }
+ \end{equation}
+ then we have:
+ \begin{equation}
+  A_f(j\omega) = \frac{1}{f} \frac{\bold{T}}{ 1 + \bold{T}} = A_{\infty}\frac{e^{\theta_m }}{e^{\theta_m }-1}
+ \end{equation}
+ the amplitude:
+ \begin{equation}
+  |A_f(j\omega)|^2 = \frac{A_{\infty}^2}{ 2(1 - cos(\theta_m))} \approx \frac{A_{\infty}^2}{\theta_m^2}
+ \end{equation}
+ \begin{equation}
+  |A_f(j\omega)| \approx \frac{A_{\infty}}{\theta_m}
+ \end{equation}
+\end{minipage}
+};
+%------------ EXEMPLO BASICO BOX ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Stability and Frequency Compensation };
+\end{tikzpicture}
+
+
 
             % \begin{tikzpicture}
 
